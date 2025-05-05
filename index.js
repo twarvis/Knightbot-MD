@@ -58,11 +58,21 @@ let owner = JSON.parse(fs.readFileSync('./data/owner.json'))
 global.botname = "KNIGHT BOT"
 global.themeemoji = "•"
 
+const settings = require('./settings')
 const pairingCode = !!phoneNumber || process.argv.includes("--pairing-code")
 const useMobile = process.argv.includes("--mobile")
 
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
-const question = (text) => new Promise((resolve) => rl.question(text, resolve))
+// Only create readline interface if we're in an interactive environment
+const rl = process.stdin.isTTY ? readline.createInterface({ input: process.stdin, output: process.stdout }) : null
+const question = (text) => {
+    if (rl) {
+        return new Promise((resolve) => rl.question(text, resolve))
+    } else {
+        // In non-interactive environment, use ownerNumber from settings
+        return Promise.resolve(settings.ownerNumber || phoneNumber)
+    }
+}
+
          
 async function startXeonBotInc() {
     let { version, isLatest } = await fetchLatestBaileysVersion()
@@ -113,7 +123,7 @@ async function startXeonBotInc() {
                     await XeonBotInc.sendMessage(mek.key.remoteJid, { 
                         text: '❌ An error occurred while processing your message.',
                         contextInfo: {
-                            forwardingScore: 999,
+                            forwardingScore: 1,
                             isForwarded: true,
                             forwardedNewsletterMessageInfo: {
                                 newsletterJid: '120363161513685998@newsletter',
@@ -199,9 +209,9 @@ async function startXeonBotInc() {
             const botNumber = XeonBotInc.user.id.split(':')[0] + '@s.whatsapp.net';
             await XeonBotInc.sendMessage(botNumber, { 
                 text: `🤖 Bot Connected Successfully!\n\n⏰ Time: ${new Date().toLocaleString()}\n✅ Status: Online and Ready!
-                \n Give a Star ⭐ to our bot:\n https://github.com/mruniquehacker/KnightBot-MD\n ✅Make sure to join below channel`,
+                \n✅Make sure to join below channel`,
                 contextInfo: {
-                    forwardingScore: 999,
+                    forwardingScore: 1,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
                         newsletterJid: '120363161513685998@newsletter',
@@ -234,7 +244,7 @@ async function startXeonBotInc() {
     
     // Modify the event listener to log the update object
     XeonBotInc.ev.on('group-participants.update', async (update) => {
-        console.log('Group Update Event:', JSON.stringify(update, null, 2));  // Add this line to debug
+        //console.log('Group Update Event:', JSON.stringify(update, null, 2));  // Add this line to debug
         await handleGroupParticipantUpdate(XeonBotInc, update);
     });
 

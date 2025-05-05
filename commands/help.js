@@ -32,18 +32,7 @@ async function helpCommand(sock, chatId, channelLink) {
 ║ ➤ .staff or .admins 
 ║ ➤ .vv
 ║ ➤ .pair or .rent
-╚═══════════════════╝
-
-╔═══════════════════╗
-🎨 *Image/Sticker Commands*:
-║ ➤ .blur <image>
-║ ➤ .simage <reply to sticker>
-║ ➤ .sticker <reply to image>
-║ ➤ .tgsticker <Link>
-║ ➤ .meme
-║ ➤ .take <packname> 
-║ ➤ .emojimix <emj1>+<emj2>
-╚═══════════════════╝   
+╚═══════════════════╝ 
 
 ╔═══════════════════╗
 🛠️ *Admin Commands*:
@@ -70,16 +59,21 @@ async function helpCommand(sock, chatId, channelLink) {
 ║ ➤ .mode
 ║ ➤ .autostatus
 ║ ➤ .clearsession
+║ ➤ .antidelete
+║ ➤ .cleartmp
+║ ➤ .setpp <reply to image>
 ╚═══════════════════╝
 
 ╔═══════════════════╗
-🔗 *Github Commands:*
-║ ➤ .git
-║ ➤ .github
-║ ➤ .sc
-║ ➤ .script
-║ ➤ .repo
-╚═══════════════════╝
+🎨 *Image/Sticker Commands*:
+║ ➤ .blur <image>
+║ ➤ .simage <reply to sticker>
+║ ➤ .sticker <reply to image>
+║ ➤ .tgsticker <Link>
+║ ➤ .meme
+║ ➤ .take <packname> 
+║ ➤ .emojimix <emj1>+<emj2>
+╚═══════════════════╝  
 
 ╔═══════════════════╗
 🎮 *Game Commands*:
@@ -90,6 +84,12 @@ async function helpCommand(sock, chatId, channelLink) {
 ║ ➤ .answer <answer>
 ║ ➤ .truth
 ║ ➤ .dare
+╚═══════════════════╝
+
+╔═══════════════════╗
+🤖 *AI Commands*:
+║ ➤ .gpt <question>
+║ ➤ .gemini <question>
 ╚═══════════════════╝
 
 ╔═══════════════════╗
@@ -130,6 +130,18 @@ async function helpCommand(sock, chatId, channelLink) {
 🎯 *Downloader*:
 ║ ➤ .play <song_name>
 ║ ➤ .song <song_name>
+║ ➤ .instagram <link>
+║ ➤ .facebook <link>
+║ ➤ .tiktok <link>
+╚═══════════════════╝
+
+╔═══════════════════╗
+🔗 *Github Commands:*
+║ ➤ .git
+║ ➤ .github
+║ ➤ .sc
+║ ➤ .script
+║ ➤ .repo
 ╚═══════════════════╝
 
 Join our channel for updates:`;
@@ -144,7 +156,7 @@ Join our channel for updates:`;
                 image: imageBuffer,
                 caption: helpMessage,
                 contextInfo: {
-                    forwardingScore: 999,
+                    forwardingScore: 1,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
                         newsletterJid: '120363161513685998@newsletter',
@@ -158,7 +170,7 @@ Join our channel for updates:`;
             await sock.sendMessage(chatId, { 
                 text: helpMessage,
                 contextInfo: {
-                    forwardingScore: 999,
+                    forwardingScore: 1,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
                         newsletterJid: '120363161513685998@newsletter',
